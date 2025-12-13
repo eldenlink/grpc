@@ -15,6 +15,9 @@ service AuthService {
   
   // Check if user has a specific role
   rpc CheckRole(CheckRoleRequest) returns (CheckRoleResponse);
+  
+  // Create/sync user and generate magic login link (for Discord bot)
+  rpc CreateMagicLink(CreateMagicLinkRequest) returns (CreateMagicLinkResponse);
 }
 
 message ValidateTokenRequest {
@@ -53,3 +56,19 @@ message CheckRoleRequest {
 message CheckRoleResponse {
   bool has_role = 1;
 }
+
+// Magic link for passwordless login via Discord bot
+message CreateMagicLinkRequest {
+  string discord_id = 1;
+  string username = 2;
+  string display_name = 3;
+  string avatar_url = 4;     // Full Discord avatar URL
+}
+
+message CreateMagicLinkResponse {
+  bool success = 1;
+  string magic_link_url = 2;  // Full URL with token
+  string user_id = 3;         // Created/synced user UUID
+  string error_message = 4;   // If success=false
+}
+
