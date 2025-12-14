@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package eldenlink.v1;
+
+option java_package = "com.hexinton.eldenlink.proto.discord";
+option java_multiple_files = true;
+
+// Discord service for member lookup
+service DiscordService {
+  // Check if a user is a member of the Discord guild
+  rpc CheckMember(CheckMemberRequest) returns (CheckMemberResponse);
+}
+
+message CheckMemberRequest {
+  string discord_id = 1;
+}
+
+message CheckMemberResponse {
+  bool is_member = 1;
+  string username = 2;      // Empty if not member
+  string display_name = 3;  // Empty if not member
+  string avatar_url = 4;    // Empty if not member
+}
