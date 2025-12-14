@@ -62,7 +62,8 @@ message CreateMagicLinkRequest {
   string discord_id = 1;
   string username = 2;
   string display_name = 3;
-  string avatar_url = 4;     // Full Discord avatar URL
+  string avatar_url = 4;          // Full Discord avatar URL
+  bool is_discord_member = 5;     // Whether user is in the Discord guild
 }
 
 message CreateMagicLinkResponse {
